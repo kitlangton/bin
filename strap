@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+idea_name = ARGV.shift
+
+Dir.mkdir idea_name
+
+class_name = idea_name.split("_").map(&:capitalize).join
+
+File.open("#{idea_name}/#{idea_name}.rb", "w") do |f|
+  f.write "class #{class_name}"
+  f.write "\n"
+  f.write "end"
+end
+
+File.open("#{idea_name}/#{idea_name}_spec.rb", "w") do |f|
+  f.write "require_relative '#{idea_name}'\n\n"
+  f.write "describe #{class_name} do"
+  f.write "\n\tit 'does something'\n"
+  f.write "end"
+end
